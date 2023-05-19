@@ -1,0 +1,27 @@
+﻿
+@model ASP121.Models.Product.ProductModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <a href="#">
+                        <img src="@product.Image" width="200" class="card-img-top" alt="@product.Name">
+                    </a>
+                    <div class="card-body">
+                        <a href="#" class="card-title h5">@product.Name</a>
+                        <h6 class="card-subtitle mb-2 text-muted">@product.Price грн.</h6>
+                        <p class="card-text">@product.Description</p>
+                        <a href="#" class="btn btn-primary">Детальніше</a>
+                        <a href="#" class="btn btn-outline-primary ml-2"><i class="fa fa-heart-o"></i></a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
