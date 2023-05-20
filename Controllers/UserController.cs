@@ -1,5 +1,6 @@
 ﻿using ASP121.Date;
 using ASP121.Models.User;
+using ASP121.Services.Hash;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using System.Text.RegularExpressions;
@@ -10,10 +11,12 @@ namespace ASP121.Controllers
     {
         // Підключення БД - інжекція залежності від контексту (зареєстрованого у Program.cs)
         private readonly DataContext _dataContext;
+        private readonly IHashService _hashService;
 
-        public UserController(DataContext dataContext)
+        public UserController(DataContext dataContext, IHashService hashService)
         {
             _dataContext = dataContext;
+            _hashService = hashService;
         }
 
         public IActionResult SignUp(UserSignupModel? model)
@@ -94,7 +97,7 @@ namespace ASP121.Controllers
             {
                 Id = Guid.NewGuid(),
                 Login = model.Login,
-                PasswordHash = model.Password,
+                PasswordHash = _hashService.HashString(model.Password),
                 Email = model.Email,
                 Avatar = newName,
                 RealName = model.RealName,
