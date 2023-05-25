@@ -9,7 +9,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IHashService, Md5HashService>();
 
-
 // Add Data Context
 builder.Services.AddDbContext<DataContext>(options =>
      options.UseMySql(

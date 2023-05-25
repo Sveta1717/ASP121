@@ -1,6 +1,7 @@
 ﻿using ASP121.Date;
 using ASP121.Models.User;
 using ASP121.Services.Hash;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using System.Text.RegularExpressions;
@@ -26,6 +27,29 @@ namespace ASP121.Controllers
                 ViewData["form"] = _ValidateModel(model);
             }
             return View(model);
+        }
+
+        [HttpPost]
+        public JsonResult LogIn([FromForm] String login, String password) 
+        {
+            /* Використовуючи _dataContext виявити чи є користувач із 
+             * переданими login та password (пароль зберігається як геш)
+             * В залежності від результату перевірки надіслати відповідь
+             * Json(new { status = "OK" })     або
+             * Json(new { status = "NO" })
+             */
+            bool userExists = _dataContext.Users121.Any(user =>
+            user.Login == login && user.PasswordHash == _hashService.HashString(password));
+
+            if (userExists)
+            {
+                return Json(new { status = "OK" });
+            }
+            else
+            {
+                return Json(new { status = "NO" });
+            }
+            //return Json(new { login, password });
         }
 
         private bool _LoginUnique(string login)
@@ -110,10 +134,3 @@ namespace ASP121.Controllers
         }
     }
 }
-/* Д.З. Валідація: 
- *       - додати перевірку на однаковість паролю та його повтору
- *       - перевірити тип файлу на допустимий перелік
- *       - * перевірити Email регулярним виразом
- *       - * перевірити пароль на складність
- *       - перевірити Логін на те, що такий вже використовується
- */

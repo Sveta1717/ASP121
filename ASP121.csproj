@@ -21,4 +21,9 @@
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\screen\Пароль на однаковість.jpg" />
+    <None Include="wwwroot\screen\Пароль на складність.jpg" />
+  </ItemGroup>
+
 </Project>
