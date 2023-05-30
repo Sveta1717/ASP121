@@ -22,6 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\screen\Datebase.jpg" />
+    <None Include="wwwroot\screen\Email.jpg" />
+    <None Include="wwwroot\screen\File.jpg" />
+    <None Include="wwwroot\screen\Login.jpg" />
     <None Include="wwwroot\screen\Пароль на однаковість.jpg" />
     <None Include="wwwroot\screen\Пароль на складність.jpg" />
   </ItemGroup>

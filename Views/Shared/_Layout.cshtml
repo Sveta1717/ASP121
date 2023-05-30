@@ -1,4 +1,4 @@
-﻿﻿
+﻿@using System.Security.Claims;﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,15 +29,43 @@
                         </li>
                     </ul>
                 </div>
+                @if(Context.User.Identity?.IsAuthenticated == true)
+                {
+                    String? avatar =
+                    Context.User.Claims
+                    .FirstOrDefault(c => c.Type == ClaimTypes.UserData)
+                    ?.Value;
+                    <img src="/uploads/@avatar" alt="Ava" class="rounded-circle" style="max-width: 40px"/>
+                   
+                    <form asp-controller="User" asp-action="SignOut" method="post">
+                        <button type="submit" class="btn btn-light">
+                            <img src="/img/Exit.png" alt="Вихід" style="max-width: 40px">
+                        </button>
+                    </form>
+                   
+                    @*
+                       Д.З. Додати посилання/кнопку для вихода (Sign Out)
+                       При натисненні скидається автентифікація та відбувається перехід
+                       на домашню сторінку.
+                       У контроллері утворюємо метод SignOut і саме на нього робимо посилання
+                       Цей метод має прибрати з сесії дані про користувача (id), але
+                       небажано повністю стирати сесію - тільки дані автентифікації.
+                       Метод має повертати результат-Redirect на головну сторінку, це
+                       змусить браузер перейти на неї
+                    *@
+                }
+                else
+                {
                 <!-- Button trigger modal -->             
                 <i class=" bi-person-lock text-dark mx-3"
                  data-bs-toggle="modal" 
                  data-bs-target="#signinModal"
                  role="button"
-                 title="Вхід до системи " style="font-size:1.7rem;">
+                 title="Вхід до системи" style="font-size:1.7rem;">
                 </i>
                 <a asp-controller="User" asp-action="SignUp"
-                   title="Реєстрація"><i class=" bi-person-add text-dark mx-3" style="font-size:1.7rem;"></i></a>
+                   title="Реєстрація"><i class="bi-person-add text-dark mx-3" style="font-size:1.7rem;"></i></a>
+                }
             </div>
         </nav>
     </header>
@@ -78,7 +106,7 @@
                                   id="signin-password-addon"><i class="bi-lock" style="font-size:1.1rem"></i></span>
                             <input type="password" class="form-control"
                                    id="signin-password" name="signin-password"
-                                   placeholder="Введитьть пароль"
+                                   placeholder="Введить пароль"
                                    aria-describedby="signin-password-addon">
                         </div>
                     </div>
