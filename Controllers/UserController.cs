@@ -46,7 +46,7 @@ namespace ASP121.Controllers
              * Json(new { status = "OK" })     або
              * Json(new { status = "NO" })
              */
-            var user = _dataContext.Users121.FirstOrDefault(u => u.Login == login);
+            var user = _dataContext.Users.FirstOrDefault(u => u.Login == login);
             if (user != null)
             {
                 if(user.PasswordHash == _hashService.HashString(password))
@@ -57,7 +57,7 @@ namespace ASP121.Controllers
                     return Json(new { status = "OK" });
                 }
             }
-            bool userYes = _dataContext.Users121.Any(user =>
+            bool userYes = _dataContext.Users.Any(user =>
             user.Login == login && user.PasswordHash == _hashService.HashString(password));
 
             if (userYes)
@@ -73,7 +73,7 @@ namespace ASP121.Controllers
 
         private bool _LoginUnique(string login)
         {
-            return _dataContext.Users121.All(user => user.Login != login);
+            return _dataContext.Users.All(user => user.Login != login);
         }
 
         // Перевіряє валідність даних у моделі, прийнятої з форми
@@ -136,7 +136,7 @@ namespace ASP121.Controllers
             }
 
             // додаємо користувача до БД
-            _dataContext.Users121.Add(new Date.Entity.User
+            _dataContext.Users.Add(new Date.Entity.User
             {
                 Id = Guid.NewGuid(),
                 Login = model.Login,
