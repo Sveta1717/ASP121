@@ -57,7 +57,7 @@ namespace ASP121.Controllers
         {
             if (model == null) { return "Дані не передані"; }
             if (String.IsNullOrEmpty(model.Title)) { return "Назва не може бути порожньою"; }
-           
+            if (string.IsNullOrEmpty(model.Description)) { return "Опис не може бути порожнім"; }
 
             if (model.Price == 0)
             {
