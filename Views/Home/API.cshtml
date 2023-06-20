@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "API";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Web API</h1>
+</div>
+
+<p>
+    <b>API</b> Application Program Interface, інтерфейс взаємодії
+    програми з додатками. У даному контексті програма - це певний
+    інформаційний центр, у якому зберігаються всі дані комплексу.
+    Додаток (застосунок) - частина комплексу, яка оперує данними,
+    частіше за все надає UI для взаємодії з людиною або іншими системами.
+    Інтерфейс - набір правил (протоколів) взаємодії (обміну данними).
+</p>
+
+<p>
+    Web API - різновід API за якого відбувається Інтернет-каналом
+    за його протоколами (TCP/IP, HTTP, JSON/XTML). Частіше за все 
+    передбачаються наступні принципи:
+</p>
+
+<ul>
+    <li>
+        Для вирішення певної задачі утворюється окремий endpoint,
+        наприклад, /api/product, а різні можливості реалізуються шляхом
+        надсилання запитів різними методами (GET, POST, ...)
+    </li>
+    <li>
+        Головна відмінність View-контроллерів та API-контроллерів полягає
+        у тому, що до View-контроллерів звертаються однаковими методами
+        (GET, інколи POST), але до різних URL-адрес, тоді як до API-контроллерів
+        звертаються багатьма методами (GET, POST, PUT, DELETE, PATCH, ...)
+        але до єдиного URL
+    </li>
+    <li>
+        Існує традиція CRUD-повноти, за якою кожен endpoint має забезпечити
+        щонайменше 4 операції, тобто підтримувати звернення чотима методами.
+    </li>
+    <li>
+        Також традиційно формат обміну данними - це JSON.
+    </li>
+    <li>
+        Для випробування API створюються окремі сторінки, або використовуються
+        спеціалізовані програми на кшталт Postman, або пакети на кшталт Swagger
+    </li>
+</ul>
+<p>
+    <button onclick="getClick()" class="btn-outline-primary">GET</button>
+    <button onclick="postClick()" class="btn-outline-warning">POST</button>
+    <button onclick="putClick()" class="btn-outline-secondary">PUT</button>
+    <button onclick="deleteClick()" class="btn-outline-danger">DELETE</button>
+    <br/>
+    <span id="outspan"></span>
+    <span id="outspann"></span>
+</p>
+
+<script>
+     function deleteClick(){
+        window
+        .fetch("/api/test/a12-g45-533", {
+            method: "DELETE"            
+        })
+        .then(r => r.json())
+        .then(j => {
+            window.outspan.innerText = JSON.stringify(j);
+        });
+    }
+
+     function putClick(){
+        window
+        .fetch("/api/test", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({login: "The-login", password: "123" })
+        })
+        .then(r => r.json())
+        .then(j => {
+            window.outspan.innerText = j.status;
+        });
+    }
+
+     function getClick(){
+        window
+        .fetch("/api/test")
+        .then(r => r.json())
+        .then(j => {
+            window.outspan.innerText = j.status;
+        });
+    }
+
+     function postClick(){
+        window
+        .fetch("/api/test", {
+            method: "POST"
+        })
+        .then(r => r.json())
+        .then(j => {
+            window.outspann.innerText = j.status;
+        });
+    }
+</script>

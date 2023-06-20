@@ -16,6 +16,10 @@ namespace ASP121.Controllers
             _logger = logger;
             _hashService = hashService;
         }
+         public ViewResult Azure()
+         {
+            return View();
+         }
 
         public IActionResult Index()
         {
@@ -46,6 +50,11 @@ namespace ASP121.Controllers
 
             };
             return View(model);
+        }
+
+        public ViewResult API()
+        {
+            return View();
         }
 
         public ViewResult Services()

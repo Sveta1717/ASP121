@@ -1,8 +1,12 @@
 ﻿using ASP121.Date;
+using ASP121.Date.Entity;
+using ASP121.Models.Rate;
 using ASP121.Models.Shop;
 using ASP121.Models.User;
 using ASP121.Services.Hash;
+
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -25,7 +29,8 @@ namespace ASP121.Controllers
                 ProductGroups = _dataContext.ProductGroups
                 .Where(g => g.DeleteDt == null).ToList(),
                 Products = _dataContext.Products
-                .Where(g => g.DeleteDt == null).ToList(),
+                .Include(p => p.Rates)   // заповнює навігаційну властивість (включає до запиту)
+                .Where(g => g.DeleteDt == null).ToList(),                
 
             };
             if(HttpContext.Session.Keys.Contains("AddMessage"))
@@ -52,7 +57,7 @@ namespace ASP121.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-
+       
         private String _ValidateModel(ShopIndexFormModel? model)
         {
             if (model == null) { return "Дані не передані"; }

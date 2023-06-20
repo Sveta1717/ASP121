@@ -5,6 +5,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     const signInButton = document.getElementById("signin-button");
     if (signInButton) signInButton.addEventListener('click', signInButtonClick);
+    for (let element of document.querySelectorAll("[data-rate-value]")) {
+        element.addEventListener('click', rateClick);
+    }
 });
 function signInButtonClick() {
     const userLoginInput = document.getElementById("signin-login");
@@ -60,4 +63,44 @@ function signInButtonClick() {
             }
         })
        
+}
+
+function rateClick(e) { // like/dislike
+    // user-id:
+    const div = e.target.closest('div');
+    const userId = div.getAttribute('data-user-id');
+    if (typeof userId == 'undefined' || userId == 0) {
+        alert('Для оцінювання слід автентифікуватись');
+        return;
+    }
+    const productId = div.getAttribute('data-product-id');
+    const rate = e.target.getAttribute('data-rate-value');
+
+    console.log(userId, productId, rate);
+    window
+        .fetch("/api/rate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                productId,
+                userId,
+                'rating': rate
+            })
+        })
+        .then(r => r.json())
+        .then(j => {
+            console.log(j)
+            if (j.status == true) {
+                const parentDiv = e.target.closest("[data-product-id]");
+                //const element = rate > 0 ? parentDiv.querySelector(".rate-positive")
+                //    : parentDiv.querySelector(".rate-negative");
+
+                //element.innerText = Number(element.innerText) + 1;
+                parentDiv.querySelector(".rate-positive").innerText = j.positive;
+                parentDiv.querySelector(".rate-negative").innerText = j.negative;
+                parentDiv.querySelector(".rate-total").innerText = +j.positive + j.negative;
+            }
+        });
 }

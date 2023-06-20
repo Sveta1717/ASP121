@@ -10,5 +10,8 @@
         public DateTime? CreateDt      { get; set;}
         public String    ImageUri      { get; set; } = null!;
         public float      Price       { get; set; }
+        
+        // Navigation properties
+        public List<Rate> Rates { get; set; } = null!;
     }
 }
