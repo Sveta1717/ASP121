@@ -1,0 +1,52 @@
+﻿@model ASP121.Models.Orm.AzureSearchImage.Value
+
+<div class="row row-cols-2 row-cols-md-3 g-4">
+    <div class="col">
+    <div class="card">
+            <img src="@(Model.contentUrl.Replace("th?id=", "embed/"))" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">@Model.name</h5>
+               
+                <p class="card-text"><a href="@Model.contentUrl">@Model.contentUrl</a></p>
+      </div>
+            <div class="card-footer">
+                <small class="text-body-secondary">@Model.datePublished</small>
+            </div>
+    </div>
+  </div>
+</div>
+
+
+
+@*
+    {
+      "webSearchUrl": "https://www.bing.com/images/search?view=detailv2&FORM=OIIRPO&q=step&id=132BAA8DB0D577FFF5F6B016DDDE24D588787310&simid=608051615961131731",
+      "name": "É preciso saber EDUCAÇÃO FÍSICA: Step e seus benefícios",
+      "thumbnailUrl": "https://tse1.mm.bing.net/th?id=OIP.UO7VkBTv5zIZbAz2ZAaKyAAAAA&pid=Api",
+      "datePublished": "2020-02-21T22:48:00.0000000Z",
+      "isFamilyFriendly": true,
+      "contentUrl": "http://3.bp.blogspot.com/-C11lVz_w7rc/TekVSOqgzdI/AAAAAAAAAJI/CpgCRoNkRcw/s1600/step2.jpg",
+      "hostPageUrl": "http://educacaofisicaunidesc.blogspot.com/2011/05/step-e-seus-beneficios.html",
+      "contentSize": "26892 B",
+      "encodingFormat": "jpeg",
+      "hostPageDisplayUrl": "educacaofisicaunidesc.blogspot.com/2011/05/step-e-seus-beneficios.html",
+      "width": 452,
+      "height": 272,
+      "hostPageFavIconUrl": "https://www.bing.com/th?id=ODF.kCKFU1-d0l3Elu2Vvbpmew&pid=Api",
+      "hostPageDomainFriendlyName": "blogspot.com",
+      "hostPageDiscoveredDate": "2013-07-06T00:00:00.0000000Z",
+      "thumbnail": {
+        "width": 452,
+        "height": 272
+      },
+      "imageInsightsToken": "ccid_UO7VkBTv*cp_93BBB3FA7B8B04EC16D00F384FD8FC8C*mid_132BAA8DB0D577FFF5F6B016DDDE24D588787310*simid_608051615961131731*thid_OIP.UO7VkBTv5zIZbAz2ZAaKyAAAAA",
+      "insightsMetadata": {
+        "pagesIncludingCount": 4,
+        "availableSizesCount": 4
+      },
+      "imageId": "132BAA8DB0D577FFF5F6B016DDDE24D588787310",
+      "accentColor": "BC4C0F"
+    },
+*@
+
+

@@ -1,0 +1,51 @@
+﻿@model ASP121.Models.Orm.AzureSearchNews.Value
+
+@*<p> 
+   <div class="card mb-3" style="max-width: 600px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <iframe width=600" height="300"
+                        src="@(Model.url.Replace("th?id=", "embed/"))">
+            </iframe>
+        </div>     
+    </div>
+</div>   
+</p>
+*@
+ <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <strong>@Model.name</strong>
+        </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+            <p class="card-text">@Model.description</p>
+                <p class="card-text"><small class="text-muted">@Model.datePublished.ToShortDateString()</small></p>
+                <a href="@Model.url" class="btn btn-primary">Читати далі</a>
+      </div>
+    </div>
+  </div>
+
+@*
+     {
+      "name": "The trans-sport two-step dishonors female athlete pioneers like my mom",
+      "url": "https://www.msn.com/en-us/news/us/the-trans-sport-two-step-dishonors-female-athlete-pioneers-like-my-mom/ar-AA1d8p4b",
+      "image": {
+        "thumbnail": {
+          "contentUrl": "https://www.bing.com/th?id=OVFT.OQx3LofSdqEPe8dc8NeWJi&pid=News",
+          "width": 700,
+          "height": 393
+        }
+      },
+      "description": "The Senate Judiciary Committee recently held a hearing entitled, “Protecting Pride: Defending the Civil Rights of LGBTQ+ Americans.\"",
+      "about": [
+        {
+          "readLink": "https://api.bing.microsoft.com/api/v7/entities/f27d93cc-823a-04ce-c16b-508dbaca512c",
+          "name": "Sport"
+        },
+        {
+          "readLink": "https://api.bing.microsoft.com/api/v7/entities/273e0477-30ed-3993-f232-f39244306805",
+          "name": "Fox News Channel"
+        }
+*@
