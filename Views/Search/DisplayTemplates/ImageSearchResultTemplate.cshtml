@@ -1,20 +1,19 @@
 ﻿@model ASP121.Models.Orm.AzureSearchImage.Value
 
-<div class="row row-cols-2 row-cols-md-3 g-4">
     <div class="col">
     <div class="card">
             <img src="@(Model.contentUrl.Replace("th?id=", "embed/"))" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">@Model.name</h5>
                
-                <p class="card-text"><a href="@Model.contentUrl">@Model.contentUrl</a></p>
+                <p class="card-text"><a href="@Model.contentUrl">Відкрити зображення</a></p>
       </div>
             <div class="card-footer">
                 <small class="text-body-secondary">@Model.datePublished</small>
             </div>
     </div>
   </div>
-</div>
+
 
 
 

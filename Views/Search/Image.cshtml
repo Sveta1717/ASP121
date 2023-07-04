@@ -53,9 +53,12 @@
         <b>@Model.SearchImageResponse.totalEstimatedMatches</b>
         зображень:
     </p>
-    foreach (var result in Model.SearchImageResponse.value)
+
+    <div class="row row-cols-2 row-cols-md-3 g-4">
+    @foreach (var result in Model.SearchImageResponse.value)
     {
         @Html.DisplayFor(m => result, "ImageSearchResultTemplate")
     }
+    </div>
 }
 
